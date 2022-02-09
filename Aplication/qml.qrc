@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qml/Pictures/blackBishop.svg</file>
+        <file>qml/Pictures/blackKing.svg</file>
+        <file>qml/Pictures/blackKnight.svg</file>
+        <file>qml/Pictures/blackPawn.svg</file>
+        <file>qml/Pictures/blackQueen.svg</file>
+        <file>qml/Pictures/blackRook.svg</file>
+        <file>qml/Pictures/whiteBishop.svg</file>
+        <file>qml/Pictures/whiteKing.svg</file>
+        <file>qml/Pictures/whiteKnight.svg</file>
+        <file>qml/Pictures/whitePawn.svg</file>
+        <file>qml/Pictures/whiteQueen.svg</file>
+        <file>qml/Pictures/whiteRook.svg</file>
+        <file>qml/Game/Cell.qml</file>
+        <file>qml/Game/Unit.qml</file>
+        <file>qml/Game/qmldir</file>
+    </qresource>
+    <qresource prefix="/images"/>
+</RCC>
