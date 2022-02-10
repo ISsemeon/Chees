@@ -25,41 +25,41 @@ ChessArmyBuilder::~ChessArmyBuilder()
 constexpr void ChessArmyBuilder::setPositions(ArmyPosition position)
 {
 	//set x  position on board
-	for(int  i = 0; i < BoardSize; i++)
+	for(int  i = 0; i < Board::BoardSize; i++)
 	{
 		pawnFigures[i]->setX(i);
 	}
-	rookPair.first->setX(ONE);
-	rookPair.second->setX(EIGHT);
+	rookPair.first->setX(Board::ONE);
+	rookPair.second->setX(Board::EIGHT);
 
-	knightPair.first->setX(TWO);
-	knightPair.second->setX(SEVEN);
+	knightPair.first->setX(Board::TWO);
+	knightPair.second->setX(Board::SEVEN);
 
-	bishopPair.first->setX(THREE);
-	bishopPair.second->setX(SIX);
+	bishopPair.first->setX(Board::THREE);
+	bishopPair.second->setX(Board::SIX);
 
-	king->setX(FOUR);
-	queen->setX(FIVE);
+	king->setX(Board::FOUR);
+	queen->setX(Board::FIVE);
 
 	//set y  position on board
 	bool checkPositionDown = (position == ArmyPosition::DOWN );
 
 	for(int  i = 0; i < 8; i++)
 	{
-		checkPositionDown ? pawnFigures[i]->setY(TWO) : pawnFigures[i]->setY(SEVEN);
+		checkPositionDown ? pawnFigures[i]->setY(Board::TWO) : pawnFigures[i]->setY(Board::SEVEN);
 	}
 
-	checkPositionDown ? rookPair.first->setY(ONE) : rookPair.first->setY(EIGHT);
-	checkPositionDown ? rookPair.second->setY(ONE) : rookPair.second->setY(EIGHT);
+	checkPositionDown ? rookPair.first->setY(Board::ONE) : rookPair.first->setY(Board::EIGHT);
+	checkPositionDown ? rookPair.second->setY(Board::ONE) : rookPair.second->setY(Board::EIGHT);
 
-	checkPositionDown ? knightPair.first->setY(ONE) : knightPair.first->setY(EIGHT);
-	checkPositionDown ? knightPair.second->setY(ONE) : knightPair.second->setY(EIGHT);
+	checkPositionDown ? knightPair.first->setY(Board::ONE) : knightPair.first->setY(Board::EIGHT);
+	checkPositionDown ? knightPair.second->setY(Board::ONE) : knightPair.second->setY(Board::EIGHT);
 
-	checkPositionDown ? bishopPair.first->setY(ONE) : bishopPair.first->setY(EIGHT);
-	checkPositionDown ? bishopPair.second->setY(ONE) : bishopPair.second->setY(EIGHT);
+	checkPositionDown ? bishopPair.first->setY(Board::ONE) : bishopPair.first->setY(Board::EIGHT);
+	checkPositionDown ? bishopPair.second->setY(Board::ONE) : bishopPair.second->setY(Board::EIGHT);
 
-	checkPositionDown ? queen->setY(ONE) : queen->setY(EIGHT);
-	checkPositionDown ? king->setY(ONE) : king->setY(EIGHT);
+	checkPositionDown ? queen->setY(Board::ONE) : queen->setY(Board::EIGHT);
+	checkPositionDown ? king->setY(Board::ONE) : king->setY(Board::EIGHT);
 
 }
 

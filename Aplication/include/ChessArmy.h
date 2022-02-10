@@ -8,6 +8,7 @@
 #include <include/RookFigure.h>
 
 #include <include/Figure.h>
+#include <include/Board.h>
 
 #include <vector>
 
@@ -25,30 +26,7 @@ public:
 		DOWN
 	};
 
-	enum KEY_POSITION
-	{
-		A,
-		B,
-		C,
-		D,
-		E,
-		F,
-		G,
-		H,
-		BoardSize
-	};
 
-	enum NUMBER_POSITION
-	{
-		ONE,
-		TWO,
-		THREE,
-		FOUR,
-		FIVE,
-		SIX,
-		SEVEN,
-		EIGHT
-	};
 
 	ChessArmyBuilder();
 	~ChessArmyBuilder();
