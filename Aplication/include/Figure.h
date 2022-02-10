@@ -43,6 +43,7 @@ public:
 	void setColor(Figure::Color newColor);
 
 	Q_INVOKABLE virtual void move();
+	virtual void info();
 
 
 signals:

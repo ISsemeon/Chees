@@ -2,15 +2,21 @@
 #include <QDebug>
 
 KingFigure::KingFigure(QObject *parent)
-: Figure(parent)
+	: Figure(parent)
 {
 	(color() == Figure::WHITE) ?
-	setPicture("qrc:/qml/Pictures/whiteKing.svg"):
-	setPicture("qrc:/qml/Pictures/blackKing.svg");
+				setPicture("qrc:/qml/Pictures/whiteKing.svg"):
+				setPicture("qrc:/qml/Pictures/blackKing.svg");
 }
 
 
 void KingFigure::move()
 {
 	qDebug("KingFigure move");
+}
+
+void KingFigure::info()
+{
+	Figure::info();
+	qDebug() << "rank KingFigure";
 }

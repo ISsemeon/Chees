@@ -13,7 +13,7 @@ public:
 public:
  	virtual void move() override;
 
-
+	void info();
 
 private:
 };

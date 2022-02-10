@@ -2,6 +2,8 @@
 
 #include <QObject>
 
+class Board;
+
 class Game: public QObject
 {
 public:
@@ -9,6 +11,7 @@ public:
 
 private:
 	void registrateObjects();
+	Board* board;
 
 };
 

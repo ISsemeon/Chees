@@ -14,3 +14,9 @@ void RookFigure::move()
 {
 	qDebug("RookFigure move");
 }
+
+void RookFigure::info()
+{
+	Figure::info();
+	qDebug() << "rank PawnFigure";
+}

@@ -14,3 +14,9 @@ void KnightFigure::move()
 {
 	qDebug("KnightFigure move");
 }
+
+void KnightFigure::info()
+{
+	Figure::info();
+	qDebug() << "rank KnightFigure";
+}

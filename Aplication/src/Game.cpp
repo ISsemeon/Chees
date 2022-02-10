@@ -2,6 +2,8 @@
 #include <QDebug>
 
 #include "include/Game.h"
+#include <include/Board.h>
+#include<include/ChessArmy.h>
 
 //figures
 #include <include/PawnFigure.h>
@@ -13,10 +15,20 @@
 
 
 
+
 Game::Game(QObject* parent)
-	: QObject(parent)
+	: QObject(parent),
+	board{new Board()}
 {
 	registrateObjects();
+	auto  builder = std::make_unique<ChessArmyBuilder>();
+	builder->newArmy(Figure::Color::BLACK, ChessArmyBuilder::ArmyPosition::DOWN);
+
+	board->setArmy(builder->getArmy());
+
+	builder->newArmy(Figure::Color::WHITE, ChessArmyBuilder::ArmyPosition::UP);
+
+	board->setArmy(builder->getArmy());
 }
 
 void Game::registrateObjects()

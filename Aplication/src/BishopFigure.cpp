@@ -14,3 +14,9 @@ void BishopFigure::move()
 {
 	qDebug("move");
 }
+
+void BishopFigure::info()
+{
+	Figure::info();
+	qDebug() << "rank BishopFigure";
+}

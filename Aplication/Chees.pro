@@ -2,10 +2,12 @@ QT += quick qml
 
 CONFIG += c++14
 
-
+DEFINES += DEBUG_MODE
 
 
 SOURCES += \
+        src/ChessArmy.cpp \
+        src/Board.cpp \
         src/BishopFigure.cpp \
         src/KingFigure.cpp \
         src/KnightFigure.cpp \
@@ -34,11 +36,14 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
 	include/BishopFigure.h \
+	include/Board.h \
+	include/ChessArmy.h \
 	include/Figure.h \
 	include/Game.h \
 	include/KingFigure.h \
 	include/KnightFigure.h \
 	include/PawnFigure.h \
+	include/Positions.h \
 	include/QueenFigure.h \
 	include/RookFigure.h \
 	include/UnitBuilder.h

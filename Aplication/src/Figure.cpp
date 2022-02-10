@@ -78,6 +78,15 @@ void Figure::move()
 	qDebug() << "Figure::move";
 }
 
+void Figure::info()
+{
+	qDebug() << "x : " << xBoard();
+	qDebug() << "y : " << yBoard();
+
+	color() == Color::WHITE ? qDebug() << "color White" : 	qDebug() << "color Black";
+	qDebug() << "alive " << isAlive();
+}
+
 Figure::Color Figure::color() const
 {
 	return m_color;
