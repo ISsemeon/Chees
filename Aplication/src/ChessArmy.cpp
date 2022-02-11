@@ -12,16 +12,6 @@ ChessArmy::ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position)
 {
 	bool checkPositionDown = (position == ArmyPosition::DOWN );
 
-	m_army.reserve(16);
-
-	//add  PawnFigures
-	for(int  i = 0; i < 8; i++)
-	{
-		m_army.push_back(new PawnFigure());
-		m_army[i]->setX(i);
-		checkPositionDown ? m_army[i]->setY(Board::TWO) : m_army[i]->setY(Board::SEVEN);
-	}
-
 	// add BishopFigure
 	Figure* leftBishop = new BishopFigure();
 	leftBishop->setX(Board::THREE);
@@ -30,9 +20,6 @@ ChessArmy::ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position)
 	Figure* rightBishop = new BishopFigure();
 	rightBishop->setX(Board::SIX);
 	checkPositionDown ? rightBishop->setY(Board::ONE) : rightBishop->setY(Board::EIGHT);
-
-	m_army.push_back(leftBishop);
-	m_army.push_back(rightBishop);
 
 	// add KnightFigure
 
@@ -44,9 +31,6 @@ ChessArmy::ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position)
 	rightKnight->setX(Board::SEVEN);
 	checkPositionDown ? rightKnight->setY(Board::ONE) : rightKnight->setY(Board::EIGHT);
 
-	m_army.push_back(leftKnight);
-	m_army.push_back(rightKnight);
-
 	//add RookFigure
 
 	Figure* leftRook = new RookFigure();
@@ -57,16 +41,13 @@ ChessArmy::ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position)
 	rightRook->setX(Board::EIGHT);
 	checkPositionDown ? rightRook->setY(Board::ONE) : rightRook->setY(Board::EIGHT);
 
-	m_army.push_back(leftRook);
-	m_army.push_back(rightRook);
-
 	//add Queen
 
 	Figure* queen = new QueenFigure();
 	queen->setX(Board::FIVE);
 	checkPositionDown ? queen->setY(Board::ONE) : queen->setY(Board::EIGHT);
 
-	m_army.push_back(queen);
+
 
 	//add King
 
@@ -74,11 +55,47 @@ ChessArmy::ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position)
 	king->setX(Board::FOUR);
 	checkPositionDown ? king->setY(Board::ONE) : king->setY(Board::EIGHT);
 
+
+	//add figures in order
+	m_army.push_back(leftRook);
+	m_army.push_back(leftKnight);
+	m_army.push_back(leftBishop);
+
+	m_army.push_back(queen);
 	m_army.push_back(king);
+
+	m_army.push_back(rightBishop);
+	m_army.push_back(rightKnight);
+	m_army.push_back(rightRook);
+
+	QVector<Figure*> pawn_vector;
+
+	//add  PawnFigures
+	for(int  i = 0; i < 8; i++)
+	{
+		Figure* figure = new PawnFigure();
+		figure->setX(i);
+		checkPositionDown ? figure->setY(Board::TWO) : figure->setY(Board::SEVEN);
+		pawn_vector.push_back(figure);
+	}
+
+
+	// for correction creation
+	if(checkPositionDown)
+	{
+	for(int  i = 7; i >= 0; i--)
+	{
+		m_army.push_front(pawn_vector[i]);
+	}
+	}
+	else
+	{
+		m_army.append(pawn_vector);
+	}
 
 	m_army.shrink_to_fit();
 
-//==================
+	//==================
 	setColor(armyColor);
 }
 
@@ -104,7 +121,7 @@ constexpr void ChessArmy::setColor(Figure::Color color)
 
 void ChessArmy::info()
 {
-		for(auto &i : m_army)
+	for(auto &i : m_army)
 	{
 		i->info();
 	}

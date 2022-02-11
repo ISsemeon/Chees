@@ -23,9 +23,6 @@ private:
 	constexpr void setColor(Figure::Color  color);
 
 	QVector<Figure* > m_army;
-
-
-
 };
 
 

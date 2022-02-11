@@ -21,12 +21,15 @@ public:
 	enum Color
 	{
 		WHITE,
-		BLACK
+		BLACK,
+		NOCOLOR
 	};
 	Q_ENUM(Color)
 
 	Figure(QObject* parent = nullptr);
 	virtual ~Figure(){};
+
+
 
 	int xBoard() const;
 	int yBoard() const;
@@ -61,4 +64,5 @@ private:
 	bool m_selected;
 	Color m_color;
 };
+
 

@@ -6,6 +6,7 @@ DEFINES += DEBUG_MODE
 
 
 SOURCES += \
+        src/VoidFigure.cpp \
         src/ChessArmy.cpp \
         src/Board.cpp \
         src/BishopFigure.cpp \
@@ -45,7 +46,8 @@ HEADERS += \
 	include/PawnFigure.h \
 	include/QueenFigure.h \
 	include/RookFigure.h \
-	include/UnitBuilder.h
+	include/UnitBuilder.h \
+	include/VoidFigure.h
 
 
 
