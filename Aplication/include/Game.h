@@ -1,17 +1,22 @@
 #pragma once
 
 #include <QObject>
-
-class Board;
+#include <include/Board.h>
 
 class Game: public QObject
 {
+	Q_OBJECT
 public:
-	Game(QObject *parent = nullptr);
+	Q_PROPERTY(Board* model READ model CONSTANT FINAL )
+	explicit Game(QObject *parent = nullptr);
+	 Q_DISABLE_COPY(Game)
+
+	const Board& model() const;
+	void setModel(const Board& newModel);
+	Board* model();
 
 private:
 	void registrateObjects();
-	Board* board;
-
+	Board* m_model;
 };
 

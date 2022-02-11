@@ -17,27 +17,29 @@
 
 
 Game::Game(QObject* parent)
-	: QObject(parent),
-	board{new Board()}
+	: QObject(parent)
 {
 	registrateObjects();
-	auto  builder = std::make_unique<ChessArmyBuilder>();
-	builder->newArmy(Figure::Color::BLACK, ChessArmyBuilder::ArmyPosition::DOWN);
 
-	board->setArmy(builder->getArmy());
+	m_model = new Board(this);
+}
 
-	builder->newArmy(Figure::Color::WHITE, ChessArmyBuilder::ArmyPosition::UP);
 
-	board->setArmy(builder->getArmy());
+Board* Game::model()
+{
+		return m_model;
 }
 
 void Game::registrateObjects()
 {
-//	qmlRegisterType<Figure> ("Figures", 1, 0, "BaseFigureQML" );
+    qmlRegisterType<Figure> ("Figures", 1, 0, "BaseFigureQML" );
 	qmlRegisterType<PawnFigure> ("Figures", 1, 0, "PawnFigure" );
 	qmlRegisterType<KingFigure> ("Figures", 1, 0, "KingFigure" );
 	qmlRegisterType<BishopFigure> ("Figures", 1, 0, "BishopFigure" );
 	qmlRegisterType<QueenFigure> ("Figures", 1, 0, "QueenFigure" );
 	qmlRegisterType<KnightFigure> ("Figures", 1, 0, "KnightFigure" );
 	qmlRegisterType<RookFigure> ("Figures", 1, 0, "RookFigure" );
+	qmlRegisterType<Board> ("Figures", 1, 0, "Board" );
 }
+
+

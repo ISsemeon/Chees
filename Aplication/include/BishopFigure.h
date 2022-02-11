@@ -13,8 +13,8 @@ public:
 public:
  	virtual void move() override;
 
-	void info();
+	void info()override;
 
-private:
+	virtual void setColor(Color newColor) override;
 };
 

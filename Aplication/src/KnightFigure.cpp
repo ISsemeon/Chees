@@ -2,11 +2,9 @@
 #include <QDebug>
 
 KnightFigure::KnightFigure(QObject *parent)
-: Figure(parent)
+	: Figure(parent)
 {
-	(color() == Figure::WHITE) ?
-	setPicture("qrc:/qml/Pictures/whiteKnight.svg"):
-	setPicture("qrc:/qml/Pictures/blackKnight.svg");
+
 }
 
 
@@ -19,4 +17,13 @@ void KnightFigure::info()
 {
 	Figure::info();
 	qDebug() << "rank KnightFigure";
+}
+
+void KnightFigure::setColor(Color newColor)
+{
+	Figure::setColor(newColor);
+
+	(Figure::color() == Figure::WHITE) ?
+				setPicture("qrc:/qml/Pictures/whiteKnight.svg"):
+				setPicture("qrc:/qml/Pictures/blackKnight.svg");
 }

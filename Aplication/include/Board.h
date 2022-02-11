@@ -1,21 +1,20 @@
 #pragma once
 #include <QObject>
+#include <include/Figure.h>
+#include<QVector>
+#include<QAbstractListModel>
 
 
 
 class ChessArmyBuilder;
-class Figure;
-class Board : public QObject
+
+class Board : public QAbstractListModel
 {
 	Q_OBJECT
-private:
-
 public:
 	Board(QObject* parent = nullptr);
 
 	static constexpr  int boardSize {8};
-
-	void setArmy(std::vector<Figure*> army);
 
 	enum KEY_POSITION
 	{
@@ -42,5 +41,12 @@ public:
 		EIGHT
 	};
 
+private:
+	QVector<Figure*> m_data;
+
+public:
+	virtual int rowCount(const QModelIndex& parent) const override;
+	virtual QVariant data(const QModelIndex& index, int role) const override;
+	virtual QHash<int, QByteArray> roleNames() const override;
 };
 

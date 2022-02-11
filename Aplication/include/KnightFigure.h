@@ -14,5 +14,7 @@ public:
  	virtual void move() override;
 
 	virtual void info() override;
+
+	virtual void setColor(Color newColor) override;
 };
 

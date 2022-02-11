@@ -4,9 +4,7 @@
 QueenFigure::QueenFigure(QObject *parent)
 	: Figure(parent)
 {
-	(color() == Figure::WHITE) ?
-				setPicture("qrc:/qml/Pictures/whiteQueen.svg"):
-				setPicture("qrc:/qml/Pictures/blackQueen.svg");
+
 }
 
 
@@ -19,4 +17,13 @@ void QueenFigure::info()
 {
 	Figure::info();
 	qDebug() << "rank QueenFigure";
+}
+
+void QueenFigure::setColor(Color newColor)
+{
+	Figure::setColor(newColor);
+
+	(color() == Figure::WHITE) ?
+				setPicture("qrc:/qml/Pictures/whiteQueen.svg"):
+				setPicture("qrc:/qml/Pictures/blackQueen.svg");
 }

@@ -11,45 +11,31 @@ ApplicationWindow {
 	visible: true
 	title: qsTr("Chess")
 
-	Row
+
+	ListView
 	{
-		spacing: 2
-		Unit
-		{
-			imgSource: figure1.picture
-			BishopFigure
-			{
-				id: figure1
-			}
-		}
-		Unit
-		{
-			imgSource: figure2.picture
-			RookFigure
-			{
-				id: figure2
-			}
-		}
-		Unit
-		{
-			imgSource: figure3.picture
-			KingFigure
-			{
-				id: figure3
-			}
-		}
-		Unit
-		{
-			imgSource: figure4.picture
-			QueenFigure
-			{
-				id: figure4
-			}
-		}
+	id: _lv
+	model: Game.model
+	anchors.fill: parent
+	spacing: 4
+
+
+	delegate: Rectangle
+	{
+		implicitHeight: picture.height
+		implicitWidth: picture.width
+
+	Image {
+		id: picture
+		source: model.figure.picture
+	}
+	Text {
+
+		anchors.fill: parent
+		text: model.figure.picture;
 	}
 
-
-
-
+	}
+	}
 
 }

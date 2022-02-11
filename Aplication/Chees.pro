@@ -1,4 +1,4 @@
-QT += quick qml
+QT += quick qml core
 
 CONFIG += c++14
 
@@ -43,7 +43,6 @@ HEADERS += \
 	include/KingFigure.h \
 	include/KnightFigure.h \
 	include/PawnFigure.h \
-	include/Positions.h \
 	include/QueenFigure.h \
 	include/RookFigure.h \
 	include/UnitBuilder.h

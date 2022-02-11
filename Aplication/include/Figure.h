@@ -40,7 +40,7 @@ public:
 	void setAlive(bool newAlive);
 	void setSelected(bool newSelected);
 	void setPicture(QString picture);
-	void setColor(Figure::Color newColor);
+	virtual void setColor(Figure::Color newColor);
 
 	Q_INVOKABLE virtual void move();
 	virtual void info();

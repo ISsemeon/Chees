@@ -1,8 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <include/Game.h>
-#include <include/PawnFigure.h>
-
+#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
@@ -11,13 +10,15 @@ int main(int argc, char *argv[])
 #endif
 
 	QGuiApplication app(argc, argv);
+	QQmlApplicationEngine engine;
 
 	// code
 	Game game;
+    engine.rootContext()->setContextProperty("Game", &game);
 
 	//*code
 
-	QQmlApplicationEngine engine;
+
 	engine.addImportPath(":/qml");
 	const QUrl url(QStringLiteral("qrc:/main.qml"));
 	QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
