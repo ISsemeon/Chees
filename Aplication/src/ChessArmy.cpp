@@ -74,7 +74,7 @@ ChessArmy::ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position)
 	king->setX(Board::FOUR);
 	checkPositionDown ? king->setY(Board::ONE) : king->setY(Board::EIGHT);
 
-	m_army.push_back(queen);
+	m_army.push_back(king);
 
 	m_army.shrink_to_fit();
 
