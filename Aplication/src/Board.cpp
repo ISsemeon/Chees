@@ -34,9 +34,45 @@ Board::Board(QObject* parent)
 
 }
 
+void Board::swapElements(int row, int column)
+{
+
+	qDebug() << "second cell row: " << row << " second cell column " << column;
+
+	int firstElementIndex = (BoardSize * row ) + column ;
+
+	auto secondElmentItter = std::find_if(m_data.begin(), m_data.end(), [&](Figure* element){return element->isSlected();});
+
+	int secondElementIndex = std::distance(m_data.begin(), secondElmentItter);
+
+	m_data[secondElementIndex]->setSelected(false);
+
+
+	beginMoveRows(QModelIndex(), firstElementIndex, 1, QModelIndex(), secondElementIndex);
+	m_data.move(firstElementIndex, secondElementIndex);
+	endMoveRows();
+
+	beginMoveRows(QModelIndex(), secondElementIndex - 1, 1, QModelIndex(), firstElementIndex);
+	m_data.move(secondElementIndex - 1 , firstElementIndex);
+	endMoveRows();
+
+}
+
+void Board::changeSelected()
+{
+	firstItemSelected = !firstItemSelected;
+	qDebug() << "changeSelected";
+}
+
+bool Board::getSelected()
+{
+	return firstItemSelected;
+}
+
 
 int Board::rowCount(const QModelIndex& parent) const
 {
+	Q_UNUSED(parent)
 	return 8;
 }
 
@@ -52,10 +88,11 @@ QVariant Board::data(const QModelIndex& index, int role) const
 	case (Qt::UserRole + 1):
 	{
 		return QVariant::fromValue(static_cast<QObject *>(m_data[elIndex]));
-	}
+	}	
+
 
 	}
-
+	return {};
 }
 
 QHash<int, QByteArray> Board::roleNames() const
@@ -67,5 +104,6 @@ QHash<int, QByteArray> Board::roleNames() const
 
 int Board::columnCount(const QModelIndex& parent) const
 {
+	Q_UNUSED(parent)
 	return 8;
 }

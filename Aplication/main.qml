@@ -10,16 +10,21 @@ ApplicationWindow {
 	height: 1400
 	visible: true
 	title: qsTr("Chess")
-
-
+	
+	
 	TableView
 	{
+		id: tableView
 		leftMargin: 140
 		topMargin: 140
-		id: _lv
-		model: Game.model
+		model: _board
 		anchors.fill: parent
+		
+		Board
+		{
+			id: _board
 
+		}
 
 		delegate: Item
 		{
@@ -27,45 +32,70 @@ ApplicationWindow {
 			implicitWidth: 140
 			implicitHeight: 140
 
+			
 			MouseArea
 			{
-			id: _mouseArea;
-			anchors.fill: _cellDelegate
-			hoverEnabled: true
-			onClicked:
-			{
-				model.figure.move()
-			}
 
 
-			Rectangle
-			{
-				color: _mouseArea.containsMouse ?  "#3b3b3b" : "#2b2b2b"
-				anchors.fill: parent
-				border.color:"grey"
-			}
-
-			Image {
-				id: picture
-				source: model.figure.picture
-				anchors.centerIn: parent
-				Component.onCompleted:
+				id: _mouseArea;
+				anchors.fill: _cellDelegate
+				hoverEnabled: true
+				onClicked:
 				{
-					if(picture.sourceSize.height > _cellDelegate.height)
+				display.text = model.figure.yBoard + " " + model.figure.xBoard;
+					if(!_board.getSelected())
 					{
-						picture.scale = 0.9;
+						model.figure.selected = true;
+						_board.changeSelected();
+						_bg.color = "#2b2b8c"
+					}
+					else if(_board.getSelected())
+					{
+						_board.swapElements(model.figure.yBoard, model.figure.xBoard);
+						_board.changeSelected();
+					}
+
+
+				}
+				
+				
+				Rectangle
+				{
+					id: _bg
+					color: _mouseArea.containsMouse ?  "#3b3b3b" : "#2b2b2b"
+					anchors.fill: parent
+					border.color:"grey"
+				}
+				
+				Image {
+					id: picture
+					source: model.figure.picture
+					anchors.centerIn: parent
+					Component.onCompleted:
+					{
+						if(picture.sourceSize.height > _cellDelegate.height)
+						{
+							picture.scale = 0.9;
+						}
 					}
 				}
+				Text {
+					
+					anchors.left: parent.left
+					anchors.top: parent.top
+	    			text: model.figure.yBoard+ ":" + model.figure.xBoard;
+					color: "White"
+				}
+				
 			}
-			Text {
-
-				anchors.fill: parent
-				//				text: model.figure.xBoard+ ":" + model.figure.yBoard;
-				color: "White"
-			}
-
 		}
+		
 	}
 
-}
+	Text {
+		id: display
+		text: qsTr("text")
+		color: "White"
+		font.pointSize: 40
+	}
 }

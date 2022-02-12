@@ -15,6 +15,12 @@ public:
 
 	static constexpr  int boardSize {8};
 
+	Q_INVOKABLE void swapElements(int row, int column);
+	Q_INVOKABLE void changeSelected();
+	Q_INVOKABLE bool getSelected();
+
+
+
 	enum KEY_POSITION
 	{
 		A,
@@ -42,11 +48,13 @@ public:
 
 private:
 	QVector<Figure*> m_data;
+	bool firstItemSelected = false;
 
 public:
 	virtual int rowCount(const QModelIndex& parent) const override;
 	virtual QVariant data(const QModelIndex& index, int role) const override;
 	virtual QHash<int, QByteArray> roleNames() const override;
 	virtual int columnCount(const QModelIndex& parent) const override;
+
 };
 
