@@ -51,7 +51,8 @@ ApplicationWindow {
 					}
 					else if(_board.getSelected())
 					{
-						_board.swapElements(model.figure.yBoard, model.figure.xBoard);
+						model.figure.selected = true;
+						_board.swapElements();
 						_board.changeSelected();
 					}
 

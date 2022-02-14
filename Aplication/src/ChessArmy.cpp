@@ -15,45 +15,43 @@ ChessArmy::ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position)
 	// add BishopFigure
 	Figure* leftBishop = new BishopFigure();
 	leftBishop->setX(Board::THREE);
-	checkPositionDown ? leftBishop->setY(Board::ONE) : leftBishop->setY(Board::EIGHT);
+	checkPositionDown ? leftBishop->setY(Board::EIGHT) : leftBishop->setY(Board::ONE);
 
 	Figure* rightBishop = new BishopFigure();
 	rightBishop->setX(Board::SIX);
-	checkPositionDown ? rightBishop->setY(Board::ONE) : rightBishop->setY(Board::EIGHT);
+	checkPositionDown ? rightBishop->setY(Board::EIGHT) : rightBishop->setY(Board::ONE);
 
 	// add KnightFigure
 
 	Figure* leftKnight = new KnightFigure();
 	leftKnight->setX(Board::TWO);
-	checkPositionDown ? leftKnight->setY(Board::ONE) : leftKnight->setY(Board::EIGHT);
+	checkPositionDown ? leftKnight->setY(Board::EIGHT) : leftKnight->setY(Board::ONE);
 
 	Figure* rightKnight = new KnightFigure();
 	rightKnight->setX(Board::SEVEN);
-	checkPositionDown ? rightKnight->setY(Board::ONE) : rightKnight->setY(Board::EIGHT);
+	checkPositionDown ? rightKnight->setY(Board::EIGHT) : rightKnight->setY(Board::ONE);
 
 	//add RookFigure
 
 	Figure* leftRook = new RookFigure();
 	leftRook->setX(Board::ONE);
-	checkPositionDown ? leftRook->setY(Board::ONE) : leftRook->setY(Board::EIGHT);
+	checkPositionDown ? leftRook->setY(Board::EIGHT) : leftRook->setY(Board::ONE);
 
 	Figure* rightRook = new RookFigure();
 	rightRook->setX(Board::EIGHT);
-	checkPositionDown ? rightRook->setY(Board::ONE) : rightRook->setY(Board::EIGHT);
+	checkPositionDown ? rightRook->setY(Board::EIGHT) : rightRook->setY(Board::ONE);
 
 	//add Queen
 
 	Figure* queen = new QueenFigure();
-	queen->setX(Board::FIVE);
-	checkPositionDown ? queen->setY(Board::ONE) : queen->setY(Board::EIGHT);
-
-
+	queen->setX(Board::FOUR);
+	checkPositionDown ? queen->setY(Board::EIGHT) : queen->setY(Board::ONE);
 
 	//add King
 
 	Figure* king = new KingFigure();
-	king->setX(Board::FOUR);
-	checkPositionDown ? king->setY(Board::ONE) : king->setY(Board::EIGHT);
+	king->setX(Board::FIVE);
+	checkPositionDown ? king->setY(Board::EIGHT) : king->setY(Board::ONE);
 
 
 	//add figures in order
@@ -71,11 +69,11 @@ ChessArmy::ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position)
 	QVector<Figure*> pawn_vector;
 
 	//add  PawnFigures
-	for(int  i = 0; i < 8; i++)
+	for(int  i = 7; i >= 0; i--)
 	{
 		Figure* figure = new PawnFigure();
 		figure->setX(i);
-		checkPositionDown ? figure->setY(Board::TWO) : figure->setY(Board::SEVEN);
+		checkPositionDown ? figure->setY(Board::SEVEN) : figure->setY(Board::TWO);
 		pawn_vector.push_back(figure);
 	}
 
@@ -83,14 +81,17 @@ ChessArmy::ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position)
 	// for correction creation
 	if(checkPositionDown)
 	{
-	for(int  i = 7; i >= 0; i--)
+	for(int  i = 0; i < 8; i++)
 	{
 		m_army.push_front(pawn_vector[i]);
 	}
 	}
 	else
 	{
-		m_army.append(pawn_vector);
+	for(int  i = 0; i < 8; i++)
+	{
+		m_army.append(pawn_vector[7 - i]);
+		}
 	}
 
 	m_army.shrink_to_fit();

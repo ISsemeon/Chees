@@ -15,7 +15,7 @@ public:
 
 	static constexpr  int boardSize {8};
 
-	Q_INVOKABLE void swapElements(int row, int column);
+	Q_INVOKABLE void swapElements();
 	Q_INVOKABLE void changeSelected();
 	Q_INVOKABLE bool getSelected();
 
@@ -56,5 +56,6 @@ public:
 	virtual QHash<int, QByteArray> roleNames() const override;
 	virtual int columnCount(const QModelIndex& parent) const override;
 
+	void showBoardOnConsole();
 };
 

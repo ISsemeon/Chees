@@ -6,7 +6,8 @@ Figure::Figure(QObject* parent)
 	  m_alive{true},
 	  m_selected{false},
 	  m_color{Figure::Color::WHITE}
-	  {}
+{}
+
 
 int Figure::xBoard() const
 {

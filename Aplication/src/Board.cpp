@@ -3,6 +3,8 @@
 #include <include/VoidFigure.h>
 #include <QVector>
 
+#include <iostream>
+
 
 
 Board::Board(QObject* parent)
@@ -20,7 +22,7 @@ Board::Board(QObject* parent)
 	QVector<Figure* > voidCells;
 	voidCells.reserve(32);
 
-	for(int i = Board::SIX; i >=Board::THREE ; i--)
+	for(int i = Board::THREE; i <= Board::SIX ; i++)
 	{
 		for (int j = 0 ;j < 8 ; j++ )
 		{
@@ -34,28 +36,32 @@ Board::Board(QObject* parent)
 
 }
 
-void Board::swapElements(int row, int column)
+void Board::swapElements()
 {
 
-	qDebug() << "second cell row: " << row << " second cell column " << column;
+	showBoardOnConsole();
 
-	int firstElementIndex = (BoardSize * row ) + column ;
 
-	auto secondElmentItter = std::find_if(m_data.begin(), m_data.end(), [&](Figure* element){return element->isSlected();});
+	auto firstElementIterator = std::find_if(m_data.begin(), m_data.end(), [&](Figure* element){return element->isSlected();});
+	if(firstElementIterator== m_data.end()){return;}
+	int firstElementIndex = std::distance(m_data.begin(), firstElementIterator);
+	m_data[firstElementIndex]->setSelected(false);
 
-	int secondElementIndex = std::distance(m_data.begin(), secondElmentItter);
+	qDebug() << "fe: " << firstElementIndex;
 
+	auto secondElementIterator = std::find_if(m_data.begin(), m_data.end(), [&](Figure* element){return element->isSlected();});
+	if(secondElementIterator== m_data.end()){return;}
+	int secondElementIndex = std::distance(m_data.begin(), secondElementIterator);
 	m_data[secondElementIndex]->setSelected(false);
 
+	qDebug() << "se: " << secondElementIndex;
 
-	beginMoveRows(QModelIndex(), firstElementIndex, 1, QModelIndex(), secondElementIndex);
-	m_data.move(firstElementIndex, secondElementIndex);
-	endMoveRows();
+	std::swap(m_data[firstElementIndex], m_data[secondElementIndex]);
+	emit dataChanged(createIndex(0, 0), createIndex(boardSize, boardSize));
 
-	beginMoveRows(QModelIndex(), secondElementIndex - 1, 1, QModelIndex(), firstElementIndex);
-	m_data.move(secondElementIndex - 1 , firstElementIndex);
-	endMoveRows();
 
+
+	showBoardOnConsole();
 }
 
 void Board::changeSelected()
@@ -67,6 +73,22 @@ void Board::changeSelected()
 bool Board::getSelected()
 {
 	return firstItemSelected;
+}
+void Board::showBoardOnConsole()
+{
+
+	std::cout << std::endl << "============" << std::endl;
+	for(auto i : m_data)
+	{
+		if( i->xBoard() == 7)
+		{
+			std::cout << " ("<< i->yBoard() << ":" << i->xBoard()<< ")";
+			std::cout << std::endl;
+			continue;
+		}
+		std::cout << " ("<< i->yBoard() << ":" << i->xBoard()<< ")";
+
+	}
 }
 
 
@@ -88,7 +110,7 @@ QVariant Board::data(const QModelIndex& index, int role) const
 	case (Qt::UserRole + 1):
 	{
 		return QVariant::fromValue(static_cast<QObject *>(m_data[elIndex]));
-	}	
+	}
 
 
 	}

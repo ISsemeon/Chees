@@ -27,9 +27,8 @@ public:
 	Q_ENUM(Color)
 
 	Figure(QObject* parent = nullptr);
+	Q_DISABLE_COPY(Figure)
 	virtual ~Figure(){};
-
-
 
 	int xBoard() const;
 	int yBoard() const;
