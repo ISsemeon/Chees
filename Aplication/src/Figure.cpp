@@ -5,8 +5,9 @@ Figure::Figure(QObject* parent)
 	: QObject(parent),
 	  m_alive{true},
 	  m_selected{false},
-	  m_color{Figure::Color::WHITE}
-{}
+	  m_color{Figure::Color::WHITE},
+	  m_lightning{false},
+	  m_hovered{false}{}
 
 
 int Figure::xBoard() const
@@ -74,10 +75,6 @@ void Figure::setPicture(QString picture)
 	emit pictureChanged();
 }
 
-void Figure::move()
-{
-	qDebug() << "Figure::move";
-}
 
 void Figure::info()
 {
@@ -88,6 +85,8 @@ void Figure::info()
 	qDebug() << "alive " << isAlive();
 }
 
+
+
 Figure::Color Figure::color() const
 {
 	return m_color;
@@ -96,4 +95,43 @@ Figure::Color Figure::color() const
 void Figure::setColor(Figure::Color newColor)
 {
 	m_color = newColor;
+}
+
+bool Figure::itsTurn() const
+{
+	return m_itsTurn;
+}
+
+void Figure::setTurn(bool newItsTurn)
+{
+	if (m_itsTurn == newItsTurn)
+		return;
+	m_itsTurn = newItsTurn;
+	emit itsTurnChanged();
+}
+
+const bool& Figure::lightning() const
+{
+	return m_lightning;
+}
+
+void Figure::setLightning(const bool& newLightning)
+{
+	if (m_lightning == newLightning)
+		return;
+	m_lightning = newLightning;
+	emit lightningChanged();
+}
+
+bool Figure::hovered() const
+{
+	return m_hovered;
+}
+
+void Figure::setHovered(bool newHovered)
+{
+	if (m_hovered == newHovered)
+		return;
+	m_hovered = newHovered;
+	emit hoveredChanged();
 }

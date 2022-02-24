@@ -14,7 +14,6 @@ int main(int argc, char *argv[])
 
 	// code
 	Game game;
-    engine.rootContext()->setContextProperty("Game", &game);
 
 	//*code
 

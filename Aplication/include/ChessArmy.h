@@ -6,13 +6,8 @@
 class ChessArmy
 {
 public:
-	enum ArmyPosition
-	{
-		UP,
-		DOWN
-	};
 
-	ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position);
+	ChessArmy(Figure::Color armyColor, Figure::ArmyPosition position);
 	~ChessArmy();
 
 	QVector<Figure*> getArmy();

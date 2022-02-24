@@ -3,6 +3,10 @@
 //base unit in chess
 
 #include <QObject>
+#include <QVector>
+#include <include/Position.h>
+
+
 
 class Figure : public QObject
 {
@@ -12,9 +16,11 @@ class Figure : public QObject
 	Q_PROPERTY(int  yBoard READ yBoard WRITE setY NOTIFY yChanged)
 	Q_PROPERTY(QString picture READ picture WRITE setPicture NOTIFY pictureChanged)
 	Q_PROPERTY(bool alive READ isAlive WRITE setAlive NOTIFY AliveChanged)
+	Q_PROPERTY(bool itsTurn READ itsTurn WRITE setTurn NOTIFY itsTurnChanged)
 	Q_PROPERTY(bool selected READ isSlected WRITE setSelected NOTIFY selectedChanged)
 	Q_PROPERTY(Color color READ color  WRITE setColor CONSTANT)
-
+	Q_PROPERTY(bool lightning READ lightning WRITE setLightning NOTIFY lightningChanged)
+	Q_PROPERTY(bool hovered READ hovered WRITE setHovered NOTIFY hoveredChanged)
 
 
 public:
@@ -24,10 +30,16 @@ public:
 		BLACK,
 		NOCOLOR
 	};
-	Q_ENUM(Color)
+		Q_ENUM(Color)
+	enum ArmyPosition
+	{
+		UP,
+		DOWN
+	};
+
 
 	Figure(QObject* parent = nullptr);
-	Q_DISABLE_COPY(Figure)
+//	Q_DISABLE_COPY(Figure)
 	virtual ~Figure(){};
 
 	int xBoard() const;
@@ -36,17 +48,25 @@ public:
 	bool isAlive() const;
 	bool isSlected() const;
 	Figure::Color color() const;
+	bool itsTurn() const;
+	const bool& lightning() const;
 
 	void setX(int newX);
 	void setY(int newY);
 	void setAlive(bool newAlive);
 	void setSelected(bool newSelected);
 	void setPicture(QString picture);
+	void setTurn(bool newItsTurn);
 	virtual void setColor(Figure::Color newColor);
-
-	Q_INVOKABLE virtual void move();
 	virtual void info();
+	void setLightning(const bool& newLightning);
 
+	virtual QVector<Position> getFreePositions() = 0;
+	virtual QVector<Position> getMoveablePositions(QVector<Position> pos) = 0;
+
+
+	bool hovered() const;
+	void setHovered(bool newHovered);
 
 signals:
 	void xChanged();
@@ -54,6 +74,11 @@ signals:
 	void AliveChanged();
 	void selectedChanged();
 	void pictureChanged();
+	void itsTurnChanged();
+
+	void lightningChanged();
+
+	void hoveredChanged();
 
 private:
 	int m_x;
@@ -62,6 +87,9 @@ private:
 	bool m_alive;
 	bool m_selected;
 	Color m_color;
+	bool m_itsTurn;
+	bool m_lightning;
+	bool m_hovered;
 };
 
 

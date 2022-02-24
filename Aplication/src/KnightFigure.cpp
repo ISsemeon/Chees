@@ -7,16 +7,16 @@ KnightFigure::KnightFigure(QObject *parent)
 
 }
 
-
-void KnightFigure::move()
+QVector<Position> KnightFigure::getFreePositions()
 {
-	qDebug("KnightFigure move");
+	return {};
 }
+
+
 
 void KnightFigure::info()
 {
-	Figure::info();
-	qDebug() << "rank KnightFigure";
+	qDebug() << "KnightFigure";
 }
 
 void KnightFigure::setColor(Color newColor)
@@ -26,4 +26,8 @@ void KnightFigure::setColor(Color newColor)
 	(Figure::color() == Figure::WHITE) ?
 				setPicture("qrc:/qml/Pictures/whiteKnight.svg"):
 				setPicture("qrc:/qml/Pictures/blackKnight.svg");
+}
+
+QVector<Position> KnightFigure::getMoveablePositions(QVector<Position> pos)
+{
 }

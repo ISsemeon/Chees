@@ -6,52 +6,52 @@
 #include <include/QueenFigure.h>
 #include <include/KnightFigure.h>
 #include <include/RookFigure.h>
-#include <include/Board.h>
+#include <include/BoardController.h>
 
-ChessArmy::ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position)
+ChessArmy::ChessArmy(Figure::Color armyColor, Figure::ArmyPosition position)
 {
-	bool checkPositionDown = (position == ArmyPosition::DOWN );
+	bool checkPositionDown = (position == Figure::DOWN );
 
 	// add BishopFigure
 	Figure* leftBishop = new BishopFigure();
-	leftBishop->setX(Board::THREE);
-	checkPositionDown ? leftBishop->setY(Board::EIGHT) : leftBishop->setY(Board::ONE);
+	leftBishop->setX(BoardController::THREE);
+	checkPositionDown ? leftBishop->setY(BoardController::EIGHT) : leftBishop->setY(BoardController::ONE);
 
 	Figure* rightBishop = new BishopFigure();
-	rightBishop->setX(Board::SIX);
-	checkPositionDown ? rightBishop->setY(Board::EIGHT) : rightBishop->setY(Board::ONE);
+	rightBishop->setX(BoardController::SIX);
+	checkPositionDown ? rightBishop->setY(BoardController::EIGHT) : rightBishop->setY(BoardController::ONE);
 
 	// add KnightFigure
 
 	Figure* leftKnight = new KnightFigure();
-	leftKnight->setX(Board::TWO);
-	checkPositionDown ? leftKnight->setY(Board::EIGHT) : leftKnight->setY(Board::ONE);
+	leftKnight->setX(BoardController::TWO);
+	checkPositionDown ? leftKnight->setY(BoardController::EIGHT) : leftKnight->setY(BoardController::ONE);
 
 	Figure* rightKnight = new KnightFigure();
-	rightKnight->setX(Board::SEVEN);
-	checkPositionDown ? rightKnight->setY(Board::EIGHT) : rightKnight->setY(Board::ONE);
+	rightKnight->setX(BoardController::SEVEN);
+	checkPositionDown ? rightKnight->setY(BoardController::EIGHT) : rightKnight->setY(BoardController::ONE);
 
 	//add RookFigure
 
 	Figure* leftRook = new RookFigure();
-	leftRook->setX(Board::ONE);
-	checkPositionDown ? leftRook->setY(Board::EIGHT) : leftRook->setY(Board::ONE);
+	leftRook->setX(BoardController::ONE);
+	checkPositionDown ? leftRook->setY(BoardController::EIGHT) : leftRook->setY(BoardController::ONE);
 
 	Figure* rightRook = new RookFigure();
-	rightRook->setX(Board::EIGHT);
-	checkPositionDown ? rightRook->setY(Board::EIGHT) : rightRook->setY(Board::ONE);
+	rightRook->setX(BoardController::EIGHT);
+	checkPositionDown ? rightRook->setY(BoardController::EIGHT) : rightRook->setY(BoardController::ONE);
 
 	//add Queen
 
 	Figure* queen = new QueenFigure();
-	queen->setX(Board::FOUR);
-	checkPositionDown ? queen->setY(Board::EIGHT) : queen->setY(Board::ONE);
+	queen->setX(BoardController::FOUR);
+	checkPositionDown ? queen->setY(BoardController::EIGHT) : queen->setY(BoardController::ONE);
 
 	//add King
 
 	Figure* king = new KingFigure();
-	king->setX(Board::FIVE);
-	checkPositionDown ? king->setY(Board::EIGHT) : king->setY(Board::ONE);
+	king->setX(BoardController::FIVE);
+	checkPositionDown ? king->setY(BoardController::EIGHT) : king->setY(BoardController::ONE);
 
 
 	//add figures in order
@@ -73,10 +73,9 @@ ChessArmy::ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position)
 	{
 		Figure* figure = new PawnFigure();
 		figure->setX(i);
-		checkPositionDown ? figure->setY(Board::SEVEN) : figure->setY(Board::TWO);
+		checkPositionDown ? figure->setY(BoardController::SEVEN) : figure->setY(BoardController::TWO);
 		pawn_vector.push_back(figure);
 	}
-
 
 	// for correction creation
 	if(checkPositionDown)
@@ -96,8 +95,9 @@ ChessArmy::ChessArmy(Figure::Color armyColor, ChessArmy::ArmyPosition position)
 
 	m_army.shrink_to_fit();
 
-	//==================
+//==================	setColor(armyColor);
 	setColor(armyColor);
+
 }
 
 ChessArmy::~ChessArmy()

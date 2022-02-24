@@ -7,15 +7,14 @@ RookFigure::RookFigure(QObject *parent)
 }
 
 
-void RookFigure::move()
+QVector<Position> RookFigure::getFreePositions()
 {
-	qDebug("RookFigure move");
+	return {};
 }
 
 void RookFigure::info()
 {
-	Figure::info();
-	qDebug() << "rank PawnFigure";
+	qDebug() << "RookFigure";
 }
 
 void RookFigure::setColor(Color newColor)
@@ -25,4 +24,8 @@ void RookFigure::setColor(Color newColor)
 	(color() == Figure::WHITE) ?
 				setPicture("qrc:/qml/Pictures/whiteRook.svg"):
 				setPicture("qrc:/qml/Pictures/blackRook.svg");
+}
+
+QVector<Position> RookFigure::getMoveablePositions(QVector<Position> pos)
+{
 }

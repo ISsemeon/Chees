@@ -11,10 +11,12 @@ public:
 
 	// Figure interface
 public:
- 	virtual void move() override;
+ 	virtual QVector<Position> getFreePositions() override;
 
 	void info()override;
 
 	virtual void setColor(Color newColor) override;
+
+	virtual QVector<Position> getMoveablePositions(QVector<Position> pos) override;
 };
 

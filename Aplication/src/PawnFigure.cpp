@@ -8,15 +8,14 @@ PawnFigure::PawnFigure(QObject *parent)
 }
 
 
-void PawnFigure::move()
+QVector<Position> PawnFigure::getFreePositions()
 {
-	qDebug("PawnFigure move");
+	return {};
 }
 
 void PawnFigure::info()
 {
-	Figure::info();
-	qDebug() << "rank PawnFigure";
+	qDebug() << "PawnFigure";
 }
 
 void PawnFigure::setColor(Color newColor)
@@ -26,4 +25,8 @@ void PawnFigure::setColor(Color newColor)
 	(Figure::color() == Figure::WHITE) ?
 				setPicture("qrc:/qml/Pictures/whitePawn.svg"):
 				setPicture("qrc:/qml/Pictures/blackPawn.svg");
+}
+
+QVector<Position> PawnFigure::getMoveablePositions(QVector<Position> pos)
+{
 }

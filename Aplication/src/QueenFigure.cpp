@@ -7,16 +7,15 @@ QueenFigure::QueenFigure(QObject *parent)
 
 }
 
-
-void QueenFigure::move()
+QVector<Position> QueenFigure::getFreePositions()
 {
-	qDebug("QueenFigure move");
+return {};
 }
+
 
 void QueenFigure::info()
 {
-	Figure::info();
-	qDebug() << "rank QueenFigure";
+	qDebug() << "QueenFigure";
 }
 
 void QueenFigure::setColor(Color newColor)
@@ -26,4 +25,8 @@ void QueenFigure::setColor(Color newColor)
 	(color() == Figure::WHITE) ?
 				setPicture("qrc:/qml/Pictures/whiteQueen.svg"):
 				setPicture("qrc:/qml/Pictures/blackQueen.svg");
+}
+
+QVector<Position> QueenFigure::getMoveablePositions(QVector<Position> pos)
+{
 }
