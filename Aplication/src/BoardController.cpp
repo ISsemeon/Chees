@@ -47,11 +47,6 @@ void BoardController::tryMove()
 	int secondElementIndex = std::distance(m_figures.begin(), secondElementIterator);
 	m_figures[secondElementIndex]->setSelected(false);
 
-	//	qDebug() << "positions Info!";
-	//	m_figures[firstElementIndex]->info();
-	//	m_figures[secondElementIndex]->info();
-	//	qDebug() << "\n";
-
 
 	bool fromOthersArmyes =  m_figures[firstElementIndex]->color() != m_figures[secondElementIndex]->color();
 
@@ -60,6 +55,12 @@ void BoardController::tryMove()
 		bool firstTurn = m_figures[firstElementIndex]->itsTurn();
 		bool secondTurn = m_figures[secondElementIndex]->itsTurn();
 		bool bouthAlive = m_figures[firstElementIndex]->isAlive() && m_figures[secondElementIndex]->isAlive();
+
+		if(firstTurn){m_figures[firstElementIndex]->setTurn(false);}
+		if(secondTurn){m_figures[secondElementIndex]->setTurn(false);}
+
+		// ---avoid abiliti to play void figure
+
 		if(firstTurn &&  bouthAlive )
 		{
 			kill(secondElementIndex);
@@ -68,8 +69,7 @@ void BoardController::tryMove()
 		{
 			kill(firstElementIndex);
 		}
-		if(firstTurn){m_figures[firstElementIndex]->setTurn(false);}
-		if(secondTurn){m_figures[secondElementIndex]->setTurn(false);}
+
 
 
 		swapPositions(firstElementIndex, secondElementIndex);

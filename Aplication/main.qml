@@ -5,8 +5,8 @@ import Figures 1.0
 
 
 ApplicationWindow {
-	width: 480
-	height: 480
+	width: 640
+	height: 640
 	visible: true
 	title: qsTr("Chess")
 	Board
@@ -28,8 +28,8 @@ ApplicationWindow {
 		delegate: Item
 		{
 			id: _cellDelegate
-			implicitWidth: 60
-			implicitHeight: 60
+			implicitWidth: 80
+			implicitHeight: 80
 			
 			MouseArea
 			{
@@ -37,19 +37,6 @@ ApplicationWindow {
 				id: _mouseArea;
 				anchors.fill: _cellDelegate
 				hoverEnabled: true
-				onHoveredChanged:
-				{
-					if(containsMouse)
-					{
-						model.figure.hovered = true;
-						_board.showPossiblePositions();
-					}
-					else
-					{
-						model.figure.hovered = false;
-						_board.turnOfLightning();
-					}
-				}
 
 				onClicked:
 				{
@@ -60,21 +47,29 @@ ApplicationWindow {
 						model.figure.itsTurn = true;
 						_board.changeSelected();
 
+						// show possible positions
+						model.figure.hovered = true;
+						_board.showPossiblePositions();
+
 					}
 					else if(_board.getSelected())
 					{
 						model.figure.selected = true;
 						_board.tryMove();
 						_board.changeSelected();
+
+						//clear litening
+						model.figure.hovered = false;
+						_board.turnOfLightning();
 					}
 				}
 				
 				Rectangle
 				{
 					id: _bg
-					color: 	model.figure.lightning ?  "#e34234" : "#2b2b2b"
+					color: 	model.figure.lightning ?  "#3b3b3b" : "#2b2b2b"
 					anchors.fill: parent
-					border.color:"grey"
+					border.color:model.figure.lightning ? "#FF9818" : "grey"
 				}
 				
 				Image {
@@ -83,15 +78,8 @@ ApplicationWindow {
 					source: model.figure.alive ? model.figure.picture : ""
 					anchors.centerIn: parent
 
-					scale: 0.4
+					scale: 0.5
 
-				}
-				Text {
-					
-					anchors.left: parent.left
-					anchors.top: parent.top
-					text: model.figure.xBoard+ ":" + model.figure.yBoard;
-					color: "White"
 				}
 				
 			}

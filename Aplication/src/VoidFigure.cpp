@@ -5,7 +5,6 @@ VoidFigure::VoidFigure(QObject *parent) : Figure(parent)
 {
 	setAlive(false);
 	setColor(Figure::NOCOLOR);
-
 }
 
 
@@ -16,7 +15,8 @@ QVector<Position> VoidFigure::getFreePositions()
 
 QVector<Position> VoidFigure::getMoveablePositions(QVector<Position> pos)
 {
-
+	Q_UNUSED(pos)
+	return {};
 }
 
 void VoidFigure::info()
