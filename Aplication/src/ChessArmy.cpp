@@ -80,23 +80,25 @@ ChessArmy::ChessArmy(Figure::Color armyColor, Figure::ArmyPosition position)
 	// for correction creation
 	if(checkPositionDown)
 	{
-	for(int  i = 0; i < 8; i++)
-	{
-		m_army.push_front(pawn_vector[i]);
-	}
+		for(int  i = 0; i < 8; i++)
+		{
+			m_army.push_front(pawn_vector[i]);
+		}
 	}
 	else
 	{
-	for(int  i = 0; i < 8; i++)
-	{
-		m_army.append(pawn_vector[7 - i]);
+		for(int  i = 0; i < 8; i++)
+		{
+			m_army.append(pawn_vector[7 - i]);
 		}
 	}
 
 	m_army.shrink_to_fit();
 
-//==================	setColor(armyColor);
+	//==================	setColor(armyColor);
 	setColor(armyColor);
+
+	setPosition(position);
 
 }
 
@@ -116,6 +118,14 @@ constexpr void ChessArmy::setColor(Figure::Color color)
 	for(auto &i : m_army)
 	{
 		i->setColor(color);
+	}
+}
+
+void ChessArmy::setPosition(Figure::ArmyPosition position)
+{
+	for(auto &i : m_army)
+	{
+		i->setPosition(position);
 	}
 }
 

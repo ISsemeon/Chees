@@ -135,3 +135,13 @@ void Figure::setHovered(bool newHovered)
 	m_hovered = newHovered;
 	emit hoveredChanged();
 }
+
+bool Figure::position() const
+{
+	return m_position;
+}
+
+void Figure::setPosition(bool newPosition)
+{
+	m_position = newPosition;
+}

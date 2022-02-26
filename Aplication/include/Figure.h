@@ -21,6 +21,7 @@ class Figure : public QObject
 	Q_PROPERTY(Color color READ color  WRITE setColor CONSTANT)
 	Q_PROPERTY(bool lightning READ lightning WRITE setLightning NOTIFY lightningChanged)
 	Q_PROPERTY(bool hovered READ hovered WRITE setHovered NOTIFY hoveredChanged)
+	Q_PROPERTY(bool position READ position WRITE setPosition)
 
 
 public:
@@ -68,6 +69,9 @@ public:
 	bool hovered() const;
 	void setHovered(bool newHovered);
 
+	bool position() const;
+	void setPosition(bool newPosition);
+
 signals:
 	void xChanged();
 	void yChanged();
@@ -90,6 +94,7 @@ private:
 	bool m_itsTurn;
 	bool m_lightning;
 	bool m_hovered;
+	bool m_position;
 };
 
 

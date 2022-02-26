@@ -10,7 +10,32 @@ PawnFigure::PawnFigure(QObject *parent)
 
 QVector<Position> PawnFigure::getFreePositions()
 {
-	return {};
+	QVector<Position> result;
+
+	Position itselfPoint;
+	itselfPoint.m_x = (xBoard());
+	itselfPoint.m_y = (yBoard());
+	result.push_back(itselfPoint);
+
+	bool topPosition = (position() == Figure::ArmyPosition::UP);
+
+	if(firstStep)
+	{
+		int y = topPosition ? yBoard() + 2 : yBoard() - 2;
+		Position point;
+		point.m_x = (xBoard());
+		point.m_y = (y);
+		result.push_back(point);
+		firstStep = false;
+	}
+
+	int y = topPosition ? yBoard() + 1 : yBoard() - 1;
+	Position point;
+	point.m_x = (xBoard());
+	point.m_y = (y);
+	result.push_back(point);
+
+	return result;
 }
 
 void PawnFigure::info()

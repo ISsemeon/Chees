@@ -11,7 +11,7 @@ public:
 
 	// Figure interface
 public:
- 	virtual QVector<Position> getFreePositions() override;
+	virtual QVector<Position> getFreePositions() override;
 
 	virtual void info() override;
 
@@ -20,5 +20,7 @@ public:
 	// Figure interface
 public:
 	virtual QVector<Position> getMoveablePositions(QVector<Position> pos) override;
+private:
+	bool firstStep = true;
 };
 

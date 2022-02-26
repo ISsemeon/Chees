@@ -16,6 +16,7 @@ public:
 private:
 
 	constexpr void setColor(Figure::Color  color);
+	void setPosition(Figure::ArmyPosition position);
 
 	QVector<Figure* > m_army;
 };
