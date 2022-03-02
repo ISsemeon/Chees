@@ -5,7 +5,7 @@ Figure::Figure(QObject* parent)
 	: QObject(parent),
 	  m_alive{true},
 	  m_selected{false},
-	  m_color{Figure::Color::WHITE},
+	  m_color{Color::WHITE},
 	  m_lightning{false},
 	  m_hovered{false}{}
 
@@ -59,6 +59,11 @@ bool Figure::isSlected() const
 	return m_selected;
 }
 
+Color Figure::color() const
+{
+	return m_color;
+}
+
 void Figure::setSelected(bool newSelected)
 {
 	if (m_selected == newSelected)
@@ -87,14 +92,12 @@ void Figure::info()
 
 
 
-Figure::Color Figure::color() const
+void Figure::setColor(Color newColor)
 {
-	return m_color;
-}
-
-void Figure::setColor(Figure::Color newColor)
-{
+	if (m_color == newColor)
+		return;
 	m_color = newColor;
+	emit colorChanged();
 }
 
 bool Figure::itsTurn() const
@@ -136,12 +139,12 @@ void Figure::setHovered(bool newHovered)
 	emit hoveredChanged();
 }
 
-bool Figure::position() const
+ArmyPosition Figure::position() const
 {
 	return m_position;
 }
 
-void Figure::setPosition(bool newPosition)
+void Figure::setPosition(ArmyPosition newPosition)
 {
 	m_position = newPosition;
 }

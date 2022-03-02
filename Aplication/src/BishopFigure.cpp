@@ -60,7 +60,7 @@ void BishopFigure::setColor(Color newColor)
 {
 	Figure::setColor(newColor);
 
-	(Figure::color() == Figure::WHITE) ?
+	(color() == Color::WHITE) ?
 				setPicture("qrc:/qml/Pictures/whiteBishop.svg"):
 				setPicture("qrc:/qml/Pictures/blackBishop.svg");
 }

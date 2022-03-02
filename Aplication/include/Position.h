@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <include/Constants.h>
 
 class Position
 {
@@ -12,12 +13,10 @@ public:
 
 	Q_PROPERTY(int x MEMBER m_x)
 	Q_PROPERTY(int y  MEMBER m_y)
-	Q_PROPERTY(int m_avaliable MEMBER m_avaliable)
-
+	Q_PROPERTY(Color m_color MEMBER m_color)
 
 	int m_x;
 	int m_y;
-	bool m_avaliable = false;
-
+	Color m_color = Color::NOCOLOR;
 };
 

@@ -11,8 +11,8 @@ BoardController::BoardController(QObject* parent)
 {
 
 	// dont change the order of calling methods in constructor!
-	ChessArmy army1(Figure::Color::WHITE, Figure::ArmyPosition::DOWN);
-	ChessArmy army2(Figure::Color::BLACK, Figure::ArmyPosition::UP);
+	ChessArmy army1(Color::WHITE, ArmyPosition::DOWN);
+	ChessArmy army2(Color::BLACK, ArmyPosition::UP);
 
 	m_figures.append(army2.getArmy());
 
@@ -109,7 +109,7 @@ void BoardController::showPossiblePositions()
 		int indexChecker =  (itter.m_y * 8) + itter.m_x;
 		if(checkPositionFree(indexChecker))
 		{
-			itter.m_avaliable = true;
+			itter.m_color = m_figures[indexChecker]->color();
 		}
 	}
 	//QVector<Position>  moveablePositions = m_figures[index]->getMoveablePositions(freePositions);

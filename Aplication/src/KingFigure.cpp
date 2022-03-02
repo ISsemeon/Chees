@@ -94,7 +94,7 @@ void KingFigure::setColor(Color newColor)
 {
 	Figure::setColor(newColor);
 
-	(color() == Figure::WHITE) ?
+	(color() == Color::WHITE) ?
 				setPicture("qrc:/qml/Pictures/whiteKing.svg"):
 				setPicture("qrc:/qml/Pictures/blackKing.svg");
 }

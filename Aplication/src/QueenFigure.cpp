@@ -99,7 +99,7 @@ void QueenFigure::setColor(Color newColor)
 {
 	Figure::setColor(newColor);
 
-	(color() == Figure::WHITE) ?
+	(color() == Color::WHITE) ?
 				setPicture("qrc:/qml/Pictures/whiteQueen.svg"):
 				setPicture("qrc:/qml/Pictures/blackQueen.svg");
 }

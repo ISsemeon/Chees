@@ -40,6 +40,7 @@ HEADERS += \
 	include/BishopFigure.h \
 	include/BoardController.h \
 	include/ChessArmy.h \
+	include/Constants.h \
 	include/Figure.h \
 	include/Game.h \
 	include/KingFigure.h \

@@ -4,7 +4,7 @@
 VoidFigure::VoidFigure(QObject *parent) : Figure(parent)
 {
 	setAlive(false);
-	setColor(Figure::NOCOLOR);
+	setColor(Color::NOCOLOR);
 }
 
 

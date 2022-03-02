@@ -7,7 +7,7 @@ class ChessArmy
 {
 public:
 
-	ChessArmy(Figure::Color armyColor, Figure::ArmyPosition position);
+	ChessArmy(Color armyColor, ArmyPosition position);
 	~ChessArmy();
 
 	QVector<Figure*> getArmy();
@@ -15,10 +15,11 @@ public:
 
 private:
 
-	constexpr void setColor(Figure::Color  color);
-	void setPosition(Figure::ArmyPosition position);
+	constexpr void setColor(Color  color);
+	void setPosition(ArmyPosition position);
 
 	QVector<Figure* > m_army;
 };
+
 
 

@@ -7,10 +7,11 @@
 #include <include/KnightFigure.h>
 #include <include/RookFigure.h>
 #include <include/BoardController.h>
+#include <include/Constants.h>
 
-ChessArmy::ChessArmy(Figure::Color armyColor, Figure::ArmyPosition position)
+ChessArmy::ChessArmy(Color armyColor, ArmyPosition position)
 {
-	bool checkPositionDown = (position == Figure::DOWN );
+	bool checkPositionDown = (position == ArmyPosition::DOWN );
 
 	// add BishopFigure
 	Figure* leftBishop = new BishopFigure();
@@ -96,10 +97,9 @@ ChessArmy::ChessArmy(Figure::Color armyColor, Figure::ArmyPosition position)
 	m_army.shrink_to_fit();
 
 	//==================	setColor(armyColor);
-	setColor(armyColor);
 
 	setPosition(position);
-
+	setColor(armyColor);
 }
 
 ChessArmy::~ChessArmy()
@@ -113,7 +113,7 @@ QVector<Figure*> ChessArmy::getArmy()
 
 
 
-constexpr void ChessArmy::setColor(Figure::Color color)
+constexpr void ChessArmy::setColor(Color color)
 {
 	for(auto &i : m_army)
 	{
@@ -121,7 +121,7 @@ constexpr void ChessArmy::setColor(Figure::Color color)
 	}
 }
 
-void ChessArmy::setPosition(Figure::ArmyPosition position)
+void ChessArmy::setPosition(ArmyPosition position)
 {
 	for(auto &i : m_army)
 	{
