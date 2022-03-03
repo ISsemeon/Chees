@@ -90,10 +90,24 @@ QVector<Position> PawnFigure::getMoveablePositions(QVector<Position> pos)
 			val.m_y == point.m_y &&
 			val.m_color != Color::NOCOLOR;
 });
+	//remove the ability of the pawn to step over the enemy figure on the first move
+	if(removeTopPosition != pos.end())
+	{
+		int y2= topPosition ? yBoard() + 2 : yBoard() - 2;
+		Position point;
+		point.m_x = (xBoard());
+		point.m_y = (y2);
+
+		auto removeStepOverPosition = std::remove_if(pos.begin(), pos.end(), [&](Position val)
+		{
+				return val.m_x == point.m_x &&
+				val.m_y == point.m_y;
+	});
+		pos.erase(removeStepOverPosition, pos.end());
+	}
 	pos.erase(removeTopPosition, pos.end());
 
 	// check possibility going strait left
-
 	Position topLeft;
 	topLeft.m_x = (xBoard() - 1);
 	topLeft.m_y = (y);
@@ -118,6 +132,20 @@ QVector<Position> PawnFigure::getMoveablePositions(QVector<Position> pos)
 			(val.m_color == color() || val.m_color == Color::NOCOLOR);
 });
 	pos.erase(removeTopRightPosition, pos.end());
+
+	// removal of the ability to move to a piece through 2 cells on the first move
+	int y2= topPosition ? yBoard() + 2 : yBoard() - 2;
+	Position doubleTop;
+	topRight.m_x = (xBoard() + 1);
+	topRight.m_y = (y2);
+
+	auto removeDoubleTopPosition =std::remove_if(pos.begin(), pos.end(), [&](Position val)
+	{
+			return val.m_x == topRight.m_x &&
+			val.m_y == topRight.m_y &&
+			color() != Color::NOCOLOR;
+});
+	pos.erase(removeDoubleTopPosition, pos.end());
 
 	return pos;
 }
