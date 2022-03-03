@@ -110,4 +110,5 @@ void KnightFigure::setColor(Color newColor)
 
 QVector<Position> KnightFigure::getMoveablePositions(QVector<Position> pos)
 {
+	return pos;
 }

@@ -106,4 +106,5 @@ void QueenFigure::setColor(Color newColor)
 
 QVector<Position> QueenFigure::getMoveablePositions(QVector<Position> pos)
 {
+	return pos;
 }

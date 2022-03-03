@@ -71,4 +71,5 @@ void RookFigure::setColor(Color newColor)
 
 QVector<Position> RookFigure::getMoveablePositions(QVector<Position> pos)
 {
+	return pos;
 }

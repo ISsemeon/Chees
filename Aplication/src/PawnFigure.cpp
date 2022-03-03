@@ -17,7 +17,6 @@ QVector<Position> PawnFigure::getFreePositions()
 
 	bool topPosition = (position() == ArmyPosition::UP);
 	bool topAvaliable = (topPosition ? yBoard() != 7 : yBoard() !=0);
-	qDebug() << "topAvaliable" << topAvaliable;
 
 	if(firstStep)
 	{
@@ -58,11 +57,6 @@ QVector<Position> PawnFigure::getFreePositions()
 		result.push_back(point);
 	}
 
-	for(auto &i : result)
-	{
-		qDebug() << "\nx: " << i.m_x << "y: " << i.m_y << "\n";
-	}
-
 	return result;
 }
 
@@ -82,5 +76,48 @@ void PawnFigure::setColor(Color newColor)
 
 QVector<Position> PawnFigure::getMoveablePositions(QVector<Position> pos)
 {
+	bool topPosition = (position() == ArmyPosition::UP);
 
+	// check possibility going strait
+	int y = topPosition ? yBoard() + 1 : yBoard() - 1;
+	Position point;
+	point.m_x = (xBoard());
+	point.m_y = (y);
+
+	auto removeTopPosition = std::remove_if(pos.begin(), pos.end(), [&](Position val)
+	{
+			return val.m_x == point.m_x &&
+			val.m_y == point.m_y &&
+			val.m_color != Color::NOCOLOR;
+});
+	pos.erase(removeTopPosition, pos.end());
+
+	// check possibility going strait left
+
+	Position topLeft;
+	topLeft.m_x = (xBoard() - 1);
+	topLeft.m_y = (y);
+
+	auto removeTopLeftPosition = std::remove_if(pos.begin(), pos.end(), [&](Position val)
+	{
+			return val.m_x == topLeft.m_x &&
+			val.m_y == topLeft.m_y &&
+			(val.m_color == color() || val.m_color == Color::NOCOLOR);
+});
+	pos.erase(removeTopLeftPosition, pos.end());
+
+	// check possibility going strait right
+	Position topRight;
+	topRight.m_x = (xBoard() + 1);
+	topRight.m_y = (y);
+
+	auto removeTopRightPosition =std::remove_if(pos.begin(), pos.end(), [&](Position val)
+	{
+			return val.m_x == topRight.m_x &&
+			val.m_y == topRight.m_y &&
+			(val.m_color == color() || val.m_color == Color::NOCOLOR);
+});
+	pos.erase(removeTopRightPosition, pos.end());
+
+	return pos;
 }

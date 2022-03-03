@@ -35,8 +35,7 @@ public:
 		E,
 		F,
 		G,
-		H,
-		BoardSize
+		H
 	};
 
 	enum NUMBER_POSITION
@@ -67,6 +66,6 @@ private:
 	//game controlling
 	void kill(int index);
 	void swapPositions(int firstIndex, int secondIndex);
-	bool checkPositionFree(int index);
+	bool positionContainsFigure(int index);
 };
 

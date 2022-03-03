@@ -101,4 +101,5 @@ void KingFigure::setColor(Color newColor)
 
 QVector<Position> KingFigure::getMoveablePositions(QVector<Position> pos)
 {
+	return pos;
 }

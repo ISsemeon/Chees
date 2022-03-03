@@ -23,7 +23,7 @@ BoardController::BoardController(QObject* parent)
 
 	for(int i = BoardController::THREE; i <= BoardController::SIX ; i++)
 	{
-		for (int j = 0 ;j < 8 ; j++ )
+		for (int j = 0 ;j < boardSize ; j++ )
 		{
 			Figure * vf= new VoidFigure();
 			vf->setX(j);
@@ -40,7 +40,6 @@ void BoardController::tryMove()
 	if(firstElementIterator== m_figures.end()){return;}
 	int firstElementIndex = std::distance(m_figures.begin(), firstElementIterator);
 	m_figures[firstElementIndex]->setSelected(false);
-
 
 	auto secondElementIterator = std::find_if(m_figures.begin(), m_figures.end(), [&](Figure* element){return element->isSlected();});
 	if(secondElementIterator== m_figures.end()){return;}
@@ -70,8 +69,6 @@ void BoardController::tryMove()
 			kill(firstElementIndex);
 		}
 
-
-
 		swapPositions(firstElementIndex, secondElementIndex);
 		std::swap(m_figures[firstElementIndex], m_figures[secondElementIndex]);
 		emit dataChanged(createIndex(0, 0), createIndex(boardSize, boardSize));
@@ -94,25 +91,29 @@ void BoardController::showPossiblePositions()
 	if(elementIterator == m_figures.end()){return;}
 	int elementIndex = std::distance(m_figures.begin(), elementIterator);
 
+	// figure return vector of evry position that this figure can be moven into
+	QVector<Position>  possiblePositions = m_figures[elementIndex]->getFreePositions();
 
-	QVector<Position>  freePositions = m_figures[elementIndex]->getFreePositions();
+	// set color in every cell in vector positions depends on avaliability of the cell
 
-	for(auto &i: freePositions)
+//	qDebug() << "showing possible positon figure x:" <<  m_figures[elementIndex]->xBoard() << "y: " << m_figures[elementIndex]->yBoard() << '\n';
+	for(auto &itter : possiblePositions)
 	{
-		int recolorIndex =(i.m_y * 8) + i.m_x;
-		m_figures[recolorIndex]->setLightning(true);
-	}
+		int indexChecker =  (itter.m_y * boardSize) + itter.m_x;
 
-
-	for(auto &itter : freePositions)
-	{
-		int indexChecker =  (itter.m_y * 8) + itter.m_x;
-		if(checkPositionFree(indexChecker))
+		if(positionContainsFigure(indexChecker))
 		{
 			itter.m_color = m_figures[indexChecker]->color();
 		}
 	}
-	//QVector<Position>  moveablePositions = m_figures[index]->getMoveablePositions(freePositions);
+	// recalculate moveable positions
+	QVector<Position>  moveablePositions = m_figures[elementIndex]->getMoveablePositions(possiblePositions);
+
+	for(auto &i: moveablePositions)
+	{
+		int lightningIndex =(i.m_y * boardSize) + i.m_x;
+		m_figures[lightningIndex]->setLightning(true);
+	}
 
 
 }
@@ -131,7 +132,7 @@ void BoardController::showBoardOnConsole()
 	std::cout << std::endl << "============" << std::endl;
 	for(auto i : m_figures)
 	{
-		if( i->xBoard() == 7)
+		if( i->xBoard() == boardSize - 1)
 		{
 			std::cout << " ("<< i->yBoard() << ":" << i->xBoard()<< ")";
 			std::cout << std::endl;
@@ -164,9 +165,9 @@ void BoardController::swapPositions(int firstIndex, int secondIndex)
 	m_figures[secondIndex]->setY(fy);
 }
 
-bool BoardController::checkPositionFree(int index)
+bool BoardController::positionContainsFigure(int index)
 {
-	return !m_figures[index]->isAlive();
+	return m_figures[index]->isAlive();
 }
 
 
@@ -181,7 +182,7 @@ QVariant BoardController::data(const QModelIndex& index, int role) const
 	int row = index.row();
 	int column = index.column();
 
-	int elIndex = (BoardSize * row ) + column ;
+	int elIndex = (boardSize * row ) + column ;
 
 	switch (role)
 	{
